@@ -5,6 +5,8 @@ import { Button } from "semantic-ui-react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import NavbarNavigation from "./components/NavbarNavigation";
+import BookList from "./pages/BookList";
+import MemberList from "./pages/MemberList";
 
 class App extends Component {
   render() {
@@ -24,6 +26,11 @@ class App extends Component {
             }}
           />
           <Route path="/login" render={props => <Login {...props} />} />
+          <Route path="/booklist" render={props => <BookList {...props} />} />
+          <Route
+            path="/memberlist"
+            render={props => <MemberList {...props} />}
+          />
         </Switch>
       </BrowserRouter>
     );

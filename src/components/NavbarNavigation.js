@@ -4,16 +4,23 @@ import { Menu } from "semantic-ui-react";
 import { requestLogout } from "../public/redux/action/auth";
 
 class NavbarNavigation extends Component {
-  // componentDidMount() {
-  //   const { auth, history } = this.props;
-  //   if (!auth.data.length) {
-  //     history.push("/login");
-  //   }
-  // }
+  componentDidMount() {
+    const { auth, history } = this.props;
+    if (!auth.data.username) {
+      history.push("/login");
+    }
+  }
 
   handleLogout = () => {
     const { dispatch } = this.props;
     dispatch(requestLogout());
+  };
+
+  handleBookList = () => {
+    this.props.history.push("/BookList");
+  };
+  handleMemberList = () => {
+    this.props.history.push("/MemberList");
   };
 
   render() {
@@ -21,19 +28,27 @@ class NavbarNavigation extends Component {
       <Menu>
         <Menu.Item
           name="editorials"
-          active={true}
-          onClick={this.handleItemClick}
+          // active={false}
+          onClick={() => {
+            this.handleBookList();
+          }}
         >
-          Editorials
+          Book List
         </Menu.Item>
 
-        <Menu.Item name="reviews" active={false} onClick={this.handleItemClick}>
-          Reviews
+        <Menu.Item
+          name="reviews"
+          // active={false}
+          onClick={() => {
+            this.handleMemberList();
+          }}
+        >
+          Member
         </Menu.Item>
 
         <Menu.Item
           name="logout"
-          active={false}
+          // active={false}
           onClick={() => {
             this.handleLogout();
           }}

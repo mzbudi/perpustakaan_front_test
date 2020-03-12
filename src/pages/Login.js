@@ -45,7 +45,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="segmentMid">
         <Segment color="red" className="segmentMid">
           <Form>
             <Form.Field>
