@@ -1,28 +1,39 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from "react";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
 import { Button } from "semantic-ui-react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import NavbarNavigation from "./components/NavbarNavigation";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Button primary>Primary</Button>
-    </div>
-  );
+class App extends Component {
+  render() {
+    const { auth } = this.props;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={props => {
+              return auth.data.username ? (
+                <Home {...props} />
+              ) : (
+                <Redirect to="/login" />
+              );
+            }}
+          />
+          <Route path="/login" render={props => <Login {...props} />} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(App);
