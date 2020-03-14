@@ -1,10 +1,15 @@
 import axios from "axios";
 
-export const requestBooks = () => {
+export const requestBooks = searchName => {
+  const config = {
+    params: {
+      searchName
+    }
+  };
   return {
     type: "GET_BOOKS",
     payload: axios
-      .get(`${process.env.REACT_APP_API_HOST}/books`)
+      .get(`${process.env.REACT_APP_API_HOST}/books`, config)
       .then(({ data }) => {
         return data.data;
       })

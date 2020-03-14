@@ -1,12 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Button,
-  Header,
-  Icon,
-  Modal,
-  Container,
-  Form
-} from "semantic-ui-react";
+import { Button, Modal, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 // import { requestLogout } from "../public/redux/action/auth";
 import { addBook, requestBooks } from "../public/redux/action/books";
@@ -32,8 +25,9 @@ class ModalAddBook extends Component {
       book_name,
       book_author
     };
-    dispatch(addBook(body));
-    dispatch(requestBooks());
+    dispatch(addBook(body)).then(() => {
+      dispatch(requestBooks());
+    });
     this.setState({ open: false });
   };
   render() {

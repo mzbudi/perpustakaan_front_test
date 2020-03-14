@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import { Button, Container, Table } from "semantic-ui-react";
+import { Button, Container, Table, Search, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import NavbarNavigation from "../components/NavbarNavigation";
 import ModalDeleteBook from "../components/ModalDeleteBook";
@@ -9,10 +9,25 @@ import ModalUpdateBook from "../components/ModalUpdateBook";
 import { requestBooks } from "../public/redux/action/books";
 
 class BookList extends Component {
+  state = {
+    search: ""
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(requestBooks());
   }
+
+  handleChangeSearch = e => {
+    this.setState(
+      {
+        search: e.target.value
+      },
+      () => {
+        this.props.dispatch(requestBooks(this.state.search));
+      }
+    );
+  };
 
   render() {
     const { books } = this.props;
@@ -20,7 +35,22 @@ class BookList extends Component {
       <Fragment>
         <NavbarNavigation {...this.props} />
         <Container>
-          <ModalAddBook />
+          <Grid columns={5}>
+            <Grid.Row>
+              <Grid.Column width={2}>
+                <ModalAddBook />
+              </Grid.Column>
+              <Grid.Column>
+                <Search
+                  // loading={}
+                  open={false}
+                  onSearchChange={e => {
+                    this.handleChangeSearch(e);
+                  }}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           <Table celled padded>
             <Table.Header>
               <Table.Row>
@@ -42,7 +72,7 @@ class BookList extends Component {
 
             <Table.Body>
               {books.data.length
-                ? books.data.map((item, index) => {
+                ? books.data.map(item => {
                     return (
                       <Table.Row>
                         <Table.Cell textAlign="center">

@@ -42,7 +42,6 @@ class ModalUpdateBook extends Component {
   render() {
     const { open, closeOnDimmerClick } = this.state;
     const { book } = this.props;
-    console.log(book);
     return (
       <Fragment>
         <Button onClick={this.closeConfigShow(true)} color="green">

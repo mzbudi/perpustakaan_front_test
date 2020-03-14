@@ -20,7 +20,6 @@ class Login extends Component {
   componentDidMount() {
     const { auth, history } = this.props;
     if (auth.data.username) {
-      console.log(auth.data.username);
       history.push("/");
     }
   }
@@ -45,7 +44,14 @@ class Login extends Component {
 
   render() {
     return (
-      <Container className="segmentMid">
+      <Container
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          height: "100%",
+          alignItems: "center"
+        }}
+      >
         <Segment color="red" className="segmentMid">
           <Form>
             <Form.Field>

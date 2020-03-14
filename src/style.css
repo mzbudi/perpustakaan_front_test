@@ -1,8 +1,7 @@
 .segmentMid {
-  max-width: 400px;
-  text-align: center;
+  min-width: 400px;
 }
 
-.flexer {
-  display: flex;
+#root {
+  height: 100%;
 }

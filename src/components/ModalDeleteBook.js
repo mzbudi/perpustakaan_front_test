@@ -14,8 +14,9 @@ class ModalDeleteBooks extends Component {
   close = () => this.setState({ open: false });
   closeWithDelete = () => {
     const { dispatch, book_id } = this.props;
-    dispatch(deleteBooks(book_id));
-    dispatch(requestBooks());
+    dispatch(deleteBooks(book_id)).then(() => {
+      dispatch(requestBooks());
+    });
     this.setState({ open: false });
   };
   render() {
@@ -25,7 +26,6 @@ class ModalDeleteBooks extends Component {
         <Button onClick={this.closeConfigShow(false, true)} color="red">
           Delete Book
         </Button>
-
         <Modal
           open={open}
           closeOnEscape={closeOnEscape}
