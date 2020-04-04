@@ -17,7 +17,7 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={props => {
+            render={(props) => {
               return auth.data.username ? (
                 <Home {...props} />
               ) : (
@@ -25,11 +25,11 @@ class App extends Component {
               );
             }}
           />
-          <Route path="/login" render={props => <Login {...props} />} />
-          <Route path="/booklist" render={props => <BookList {...props} />} />
+          <Route path="/login" render={(props) => <Login {...props} />} />
+          <Route path="/booklist" render={(props) => <BookList {...props} />} />
           <Route
             path="/memberlist"
-            render={props => <MemberList {...props} />}
+            render={(props) => <MemberList {...props} />}
           />
         </Switch>
       </BrowserRouter>
@@ -37,9 +37,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 

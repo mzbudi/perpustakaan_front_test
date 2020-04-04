@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const requestMembers = () => {
+const requestMembers = (searchName) => {
   const config = {
-    params: "",
+    params: { searchName },
   };
   return {
     type: "GET_MEMBER",
@@ -14,14 +14,4 @@ const requestMembers = () => {
   };
 };
 
-const addMember = (body) => {
-  return {
-    type: "POST_MEMBER",
-    payload: axios
-      .post(`${process.env.REACT_APP_API_HOST}/member`, body)
-      .then(({ data }) => {
-        return data.data;
-      }),
-  };
-};
-export { requestMembers, addMember };
+export { requestMembers };

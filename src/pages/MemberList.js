@@ -1,22 +1,20 @@
 import React, { Component, Fragment } from "react";
 
-import { Button, Container, Header, Table, Rating } from "semantic-ui-react";
+import { Button, Container, Table, Search } from "semantic-ui-react";
 import { connect } from "react-redux";
 import NavbarNavigation from "../components/NavbarNavigation";
-import ModalDeleteBook from "../components/ModalDeleteBook";
 import ModalAddMember from "../components/ModalAddMember";
 import { requestMembers } from "../public/redux/action/member";
-import axios from "axios";
 
 class MemberList extends Component {
   state = {
     memberList: [],
-    searchName: "",
+    search: "",
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(requestMembers());
+    dispatch(requestMembers(this.state.search));
     // const config = {
     //   params: this.state.searchName,
     // };
@@ -27,6 +25,17 @@ class MemberList extends Component {
     // });
   }
 
+  handleChangeSearch = (e) => {
+    this.setState(
+      {
+        search: e.target.value,
+      },
+      () => {
+        this.props.dispatch(requestMembers(this.state.search));
+      }
+    );
+  };
+
   render() {
     const { member } = this.props;
     const { memberList } = this.state;
@@ -36,6 +45,13 @@ class MemberList extends Component {
         <NavbarNavigation {...this.props} />
         <Container>
           <ModalAddMember />
+          <Search
+            // loading={}
+            open={false}
+            onSearchChange={(e) => {
+              this.handleChangeSearch(e);
+            }}
+          />
           <Table celled padded>
             <Table.Header>
               <Table.Row>

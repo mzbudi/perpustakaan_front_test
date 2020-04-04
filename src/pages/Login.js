@@ -7,7 +7,7 @@ import {
   Form,
   Segment,
   Grid,
-  Container
+  Container,
 } from "semantic-ui-react";
 import { requestLogin } from "../public/redux/action/auth";
 // import Book from "./Book";
@@ -15,7 +15,7 @@ import { requestLogin } from "../public/redux/action/auth";
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
   };
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class Login extends Component {
 
   handleChange = (e, type) => {
     this.setState({
-      [type]: e.target.value
+      [type]: e.target.value,
     });
   };
 
@@ -36,7 +36,7 @@ class Login extends Component {
     const { username, password } = this.state;
     const body = {
       username,
-      password
+      password,
     };
     dispatch(requestLogin(body)).then(() => {
       history.push("/");
@@ -50,7 +50,7 @@ class Login extends Component {
           display: "flex",
           justifyContent: "center",
           height: "100%",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Segment color="red" className="segmentMid">
@@ -59,7 +59,7 @@ class Login extends Component {
               <label>Username</label>
               <input
                 placeholder="username"
-                onChange={e => {
+                onChange={(e) => {
                   this.handleChange(e, "username");
                 }}
               />
@@ -69,7 +69,7 @@ class Login extends Component {
               <input
                 type="password"
                 placeholder="password"
-                onChange={e => {
+                onChange={(e) => {
                   this.handleChange(e, "password");
                 }}
               />
@@ -85,9 +85,9 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 
