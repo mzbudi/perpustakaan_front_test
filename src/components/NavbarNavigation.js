@@ -5,10 +5,10 @@ import { requestLogout } from "../public/redux/action/auth";
 
 class NavbarNavigation extends Component {
   componentDidMount() {
-    const { auth, history } = this.props;
-    if (!auth.data.username) {
-      history.push("/login");
-    }
+    // const { auth, history } = this.props;
+    // if (!auth.data.username) {
+    //   history.push("/login");
+    // }
   }
 
   handleLogout = () => {
@@ -59,9 +59,9 @@ class NavbarNavigation extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 };
 

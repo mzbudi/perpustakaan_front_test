@@ -4,60 +4,75 @@ import { Button, Container, Header, Table, Rating } from "semantic-ui-react";
 import { connect } from "react-redux";
 import NavbarNavigation from "../components/NavbarNavigation";
 import ModalDeleteBook from "../components/ModalDeleteBook";
-import { requestBooks } from "../public/redux/action/books";
+import ModalAddMember from "../components/ModalAddMember";
+import { requestMembers } from "../public/redux/action/member";
+import axios from "axios";
 
 class MemberList extends Component {
+  state = {
+    memberList: [],
+    searchName: "",
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(requestBooks());
+    dispatch(requestMembers());
+    // const config = {
+    //   params: this.state.searchName,
+    // };
+    // axios.get("http://127.0.0.1:3001/member/", config).then(({ data }) => {
+    //   this.setState({
+    //     memberList: data.data,
+    //   });
+    // });
   }
 
   render() {
-    const { books } = this.props;
+    const { member } = this.props;
+    const { memberList } = this.state;
+    console.log(member);
     return (
       <Fragment>
         <NavbarNavigation {...this.props} />
         <Container>
-          <Button primary>Add Book</Button>
+          <ModalAddMember />
           <Table celled padded>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell singleLine textAlign="center">
-                  Book Id
+                  Member Id
                 </Table.HeaderCell>
                 <Table.HeaderCell textAlign="center">
-                  Book Name
+                  Member Name
                 </Table.HeaderCell>
                 <Table.HeaderCell textAlign="center">
-                  Book Author
+                  Member Address
                 </Table.HeaderCell>
-                <Table.HeaderCell textAlign="center">
-                  Book Status
-                </Table.HeaderCell>
+                <Table.HeaderCell textAlign="center">Gender</Table.HeaderCell>
                 <Table.HeaderCell textAlign="center">Action</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              {books.data.length
-                ? books.data.map((item, index) => {
+              {member.dataMember.length
+                ? member.dataMember.map((item, index) => {
                     return (
                       <Table.Row>
                         <Table.Cell textAlign="center">
-                          {item.book_id}
+                          {item.id_member}
                         </Table.Cell>
                         <Table.Cell singleLine textAlign="center">
-                          {item.book_name}
+                          {item.member_name}
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          {item.book_author}
+                          {item.member_address}
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          {item.book_status}
+                          {item.member_gender}
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button primary>Add Book</Button>
-                          <ModalDeleteBook book_id={item.book_id} />
+                          <Button primary>Act 1</Button>
+                          <Button secondary>Act 2</Button>
                         </Table.Cell>
                       </Table.Row>
                     );
@@ -71,10 +86,11 @@ class MemberList extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    books: state.books
+    books: state.books,
+    member: state.member,
   };
 };
 export default connect(mapStateToProps)(MemberList);

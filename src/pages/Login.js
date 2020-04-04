@@ -10,6 +10,7 @@ import {
   Container
 } from "semantic-ui-react";
 import { requestLogin } from "../public/redux/action/auth";
+// import Book from "./Book";
 
 class Login extends Component {
   state = {
@@ -78,6 +79,7 @@ class Login extends Component {
             </Button>
           </Form>
         </Segment>
+        {/* <Book /> */}
       </Container>
     );
   }
