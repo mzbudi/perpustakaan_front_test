@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
 
-import { Button, Container, Table, Search } from "semantic-ui-react";
+import { Button, Container, Table, Search, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import NavbarNavigation from "../components/NavbarNavigation";
 import ModalAddMember from "../components/ModalAddMember";
+import ModalUpdateMember from "../components/ModalUpdateMember";
 import { requestMembers } from "../public/redux/action/member";
 
 class MemberList extends Component {
@@ -38,20 +39,26 @@ class MemberList extends Component {
 
   render() {
     const { member } = this.props;
-    const { memberList } = this.state;
+    // const { memberList } = this.state;
     console.log(member);
     return (
       <Fragment>
         <NavbarNavigation {...this.props} />
         <Container>
-          <ModalAddMember />
-          <Search
-            // loading={}
-            open={false}
-            onSearchChange={(e) => {
-              this.handleChangeSearch(e);
-            }}
-          />
+          <Grid column={5}>
+            <Grid.Column width={3} stretched>
+              <ModalAddMember />
+            </Grid.Column>
+            <Grid.Column>
+              <Search
+                // loading={}
+                open={false}
+                onSearchChange={(e) => {
+                  this.handleChangeSearch(e);
+                }}
+              />
+            </Grid.Column>
+          </Grid>
           <Table celled padded>
             <Table.Header>
               <Table.Row>
@@ -87,8 +94,8 @@ class MemberList extends Component {
                           {item.member_gender}
                         </Table.Cell>
                         <Table.Cell textAlign="center">
-                          <Button primary>Act 1</Button>
-                          <Button secondary>Act 2</Button>
+                          <ModalUpdateMember member={item} />
+                          <Button secondary>Delete Data</Button>
                         </Table.Cell>
                       </Table.Row>
                     );

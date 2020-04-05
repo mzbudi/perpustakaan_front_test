@@ -1,7 +1,7 @@
 const initialState = {
   data: [],
   message: "",
-  isLoading: false
+  isLoading: false,
 };
 
 const auth = (state = initialState, action) => {
@@ -9,22 +9,22 @@ const auth = (state = initialState, action) => {
     case "POST_LOGIN_PENDING":
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     case "POST_LOGIN_REJECTED":
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
       };
     case "POST_LOGIN_FULFILLED":
       return {
         ...state,
         data: action.payload,
-        isLoading: false
+        isLoading: false,
       };
     case "LOGOUT":
       return {
-        data: []
+        data: [],
       };
     default:
       return state;

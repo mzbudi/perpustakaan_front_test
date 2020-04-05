@@ -1,14 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "../style.css";
 import { connect } from "react-redux";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Segment,
-  Grid,
-  Container,
-} from "semantic-ui-react";
+import { Button, Form, Segment, Container } from "semantic-ui-react";
 import { requestLogin } from "../public/redux/action/auth";
 // import Book from "./Book";
 
